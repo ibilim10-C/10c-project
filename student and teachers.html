@@ -1,0 +1,689 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>Оқушылар және Мұғалімдер - Zhetysai Ibilim 10C Class</title>
+		<meta charset="utf-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript>
+			<link rel="stylesheet" href="assets/css/noscript.css" />
+		</noscript>
+		<style>
+		.gallery-container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 30px;
+			padding: 40px 20px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.card {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+			transition: all 0.3s ease;
+			cursor: pointer;
+			position: relative;
+			min-height: 350px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+		}
+
+		.card.teacher {
+			background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+		}
+
+		.card-image {
+			width: 100%;
+			height: 200px;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 80px;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.card.teacher .card-image {
+			background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+		}
+
+		.card-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.card-emoji {
+			font-size: 90px;
+			animation: float 3s ease-in-out infinite;
+			animation-delay: 0.5s;
+		}
+
+		@keyframes float {
+
+			0%,
+			100% {
+				transform: translateY(0px);
+			}
+
+			50% {
+				transform: translateY(-20px);
+			}
+		}
+
+		.card-content {
+			padding: 20px;
+			color: white;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.card-name {
+			font-size: 22px;
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		.card-role {
+			font-size: 12px;
+			opacity: 0.9;
+			margin-bottom: 10px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.card-bio {
+			font-size: 14px;
+			opacity: 0.95;
+			margin-bottom: 15px;
+			flex-grow: 1;
+			line-height: 1.5;
+		}
+
+		.card-tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: auto;
+		}
+
+		.tag {
+			background: rgba(255, 255, 255, 0.3);
+			padding: 5px 12px;
+			border-radius: 20px;
+			font-size: 12px;
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
+
+		.section-title {
+			text-align: center;
+			font-size: 36px;
+			font-weight: bold;
+			margin: 60px 0 40px 0;
+			color: whitesmoke;
+			position: relative;
+			padding-bottom: 20px;
+		}
+
+		.section-title::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 80px;
+			height: 4px;
+			background: linear-gradient(90deg, #667eea, #764ba2);
+			border-radius: 2px;
+		}
+
+		.teachers-section {
+			background: #f9f9f9;
+			padding-bottom: 60px;
+		}
+
+		.section-subtitle1 {
+			text-align: center;
+			color: rgb(82, 82, 82);
+			font-size: 16px;
+			margin-bottom: 40px;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.section-subtitle {
+			text-align: center;
+			color: whitesmoke;
+			font-size: 16px;
+			margin-bottom: 40px;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		@media (max-width: 768px) {
+			.gallery-container {
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 20px;
+				padding: 20px 10px;
+			}
+
+			.section-title {
+				font-size: 28px;
+				margin: 40px 0 30px 0;
+			}
+
+			.card {
+				min-height: 300px;
+			}
+
+			.card-image {
+				height: 170px;
+				width: 350px;
+			}
+
+			.card-emoji {
+				font-size: 70px;
+			}
+		}
+	</style>
+	</head>
+
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="index.html">Zhetysai Ibilim 10C</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.html">Home - Меню</a></li>
+									<li><a href="student and teachers.html">Students and Teachers</a></li>
+
+									<li><a href="gallery.html">Gallery</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Main -->
+			<article id="main">
+				<header
+					style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 60px 20px;">
+					<h2 style="font-size: 42px; margin-bottom: 15px;">Оқушылар және
+						Мұғалімдер</h2>
+				</header>
+
+				<!-- Teachers Section -->
+				<section class="teachers-section">
+					<h3 class="section-title" style="color: #333;">👨‍🏫 Мұғалімдер /
+						Teachers</h3>
+					<p class="section-subtitle1">Мұғалімдер біздің сыныптың негізі және олардың
+						еңбегі бағалы.</p>
+
+					<div class="gallery-container">
+						<!-- Teacher 1 -->
+						<div class="card teacher">
+							<div class="card-image">
+
+								<img class="card-emoji" src="images/merey_apai.jpeg" alt>
+							</div>
+							<div class="card-content">
+								<div class="card-name">Мерей апай</div>
+								<div class="card-role">Куратор</div>
+								<div class="card-bio">Біздің сыныптың жетекшісі және қамқоршысы.</div>
+								<div class="card-tags">
+									<span class="tag">Профессионал Математик</span>
+									<span class="tag">Қамқор жетекші</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Teacher 2 -->
+						<div class="card teacher">
+							<div class="card-image">
+								<span class="card-emoji">👨‍🏫</span>
+							</div>
+							<div class="card-content">
+								<div class="card-name">Мақсат Ағай</div>
+								<div class="card-role">Мектеп Директоры</div>
+								<div class="card-bio">Білім беру саласында тәжірибелі және жетекшілік
+									қабілеті жоғары.</div>
+								<div class="card-tags">
+									<span class="tag">IT</span>
+									<span class="tag">Цифрлық Білім</span>
+									<span class="tag">Математика </span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Teacher 3 -->
+						<div class="card teacher">
+							<div class="card-image">
+								<span class="card-emoji">👩‍🏫</span>
+							</div>
+							<div class="card-content">
+								<div class="card-name">Нұргүл Апай</div>
+								<div class="card-role">Негізгі Математика пәні мұғалімі</div>
+								<div class="card-bio">Өте тәжірибелі және білімді мұғалім.</div>
+								<div class="card-tags">
+									<span class="tag">Math</span>
+									<span class="tag">10-11 ҰБТ-ға дайындау</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Students Section -->
+				<section>
+					<h3 class="section-title">👨‍🎓 Оқушылар / Students</h3>
+					<p class="section-subtitle">Біздің сыныптың оқушылары және олардың
+						қабілеттері.</p>
+
+					<div class="gallery-container">
+						<!-- Student 1 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/aman.jpeg" alt="🌟">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Аман</div>
+
+								<div class="card-bio">Спорт секторы. Ол спорт шебері⚡</div>
+								<div class="card-tags">
+									<span class="tag">Sport</span>
+									<span class="tag">Geometry</span>
+									<span class="tag">math</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Student 2 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/zeinep.jpeg" alt="⚡">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Зейнеп</div>
+
+								<div class="card-bio">Зейнеп мақсатшыл және табанды оқушы. Көркіне ақылы
+									сай!🌟</div>
+								<div class="card-tags">
+									<span class="tag">Math</span>
+									<span class="tag">Geo</span>
+									<span class="tag">Beauty</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Student 3 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/bayan.jpeg" alt="🎨">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Баян</div>
+
+								<div class="card-bio">
+									Шығармашылық және өнерге құштар оқушы.🎨
+								</div>
+								<div class="card-tags">
+									<span class="tag">Art</span>
+									<span class="tag">Music</span>
+									<span class="tag">Creative</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Student 4 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/daryn.jpeg" alt="⚽">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Daryn</div>
+
+								<div class="card-bio">
+									Волейболмен айналысуды жақсы көреді және командада жетекші рөл
+									атқарады.⚽
+								</div>
+								<div class="card-tags">
+									<span class="tag">Sports</span>
+									<span class="tag">Volleyball</span>
+									<span class="tag">Leader</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Student 5 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/ernur.jpeg" alt="📚">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Ernur</div>
+
+								<div class="card-bio">
+									Әдебиет пен тілдерді жақсы көретін оқушы.📚
+								</div>
+								<div class="card-tags">
+									<span class="tag">Literature</span>
+									<span class="tag">Languages</span>
+									<span class="tag">Writing</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Student 6 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/inkar.jpeg" alt="🚀">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Іңкәр</div>
+
+								<div class="card-bio">
+									Ғылым мен технологияға қызығатын оқушы.🚀
+								</div>
+								<div class="card-tags">
+									<span class="tag">STEM</span>
+									<span class="tag">Innovation</span>
+									<span class="tag">Future</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 7 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/nurlan.jpeg" alt="💻">
+							</div>
+
+							<div class="card-content">
+								<div class="card-name">Нұрлан</div>
+
+								<div class="card-bio">
+									Бағдарламалау және веб-дамуға қызығатын оқушы.💻
+								</div>
+								<div class="card-tags">
+									<span class="tag">Programming</span>
+									<span class="tag">Web Development</span>
+									<span class="tag">Tech Enthusiast</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 8 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/kazyna.jpeg" alt="🎭">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Қазына</div>
+
+								<div class="card-bio">
+									Театр және драмаға қызығатын оқушы.🎭
+								</div>
+								<div class="card-tags">
+									<span class="tag">Theatre</span>
+									<span class="tag">Drama</span>
+									<span class="tag">Performance</span>
+								</div>
+							</div>
+						</div>
+						<!-- student 9 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/nargiz.jpeg" alt="🎶">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Наргиз</div>
+
+								<div class="card-bio">
+									Музикаға және биге құштар оқушы.🎶
+								</div>
+								<div class="card-tags">
+									<span class="tag">Music</span>
+									<span class="tag">Dance</span>
+									<span class="tag">Performance</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 10 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/nurasyl.jpeg" alt="⚙️">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Нұрасыл</div>
+
+								<div class="card-bio">
+									Механика және инженерияға қызығатын оқушы.⚙️
+								</div>
+								<div class="card-tags">
+									<span class="tag">Engineering</span>
+									<span class="tag">Mechanics</span>
+									<span class="tag">Innovation</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 11 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/rabya.jpeg" alt="🌸">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Рабия</div>
+
+								<div class="card-bio">
+									Өнер мен табиғатты жақсы көретін оқушы.🌸
+								</div>
+								<div class="card-tags">
+									<span class="tag">Art</span>
+									<span class="tag">Nature</span>
+									<span class="tag">Creativity</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 12 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/sabit.jpeg" alt="🎮">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Сәбит</div>
+
+								<div class="card-bio">
+									Спорт пен технологияға қызығатын оқушы.🎮
+								</div>
+								<div class="card-tags">
+									<span class="tag">Gaming</span>
+									<span class="tag">Programming</span>
+									<span class="tag">Tech</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 13 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/abdurakhman.jpeg" alt="🏀">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Абдурахман</div>
+
+								<div class="card-bio">
+									Биге және спортқа қызығатын оқушы.🏀
+								</div>
+								<div class="card-tags">
+									<span class="tag">Basketball</span>
+									<span class="tag">Sports</span>
+									<span class="tag">Athlete</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 14 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/zhanerke.jpeg" alt="🌸">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Жәнерке</div>
+
+								<div class="card-bio">
+									Жәнерке өтет шығармашыл және өнерге құштар оқушы.
+								</div>
+								<div class="card-tags">
+									<span class="tag">Beauty</span>
+									<span class="tag">English</span>
+									<span class="tag">Biology</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 15 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="#" alt="🥊">
+							</div>
+
+							<div class="card-content">
+								<div class="card-name">Нұрбек</div>
+
+								<div class="card-bio">
+									Бокспен айналысуды жақсы көреді және болашақта спортшы болуды
+									армандайды.
+								</div>
+								<div class="card-tags">
+									<span class="tag">Boxing</span>
+									<span class="tag">Sports</span>
+									<span class="tag">Athlete</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 16 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="#" alt>
+							</div>
+							<div class="card-content">
+								<div class="card-name">Аян</div>
+
+								<div class="card-bio">
+									Өте мейірімді және көмекші оқушы.
+								</div>
+								<div class="card-tags">
+									<span class="tag">Helpful</span>
+									<span class="tag">Kind</span>
+									<span class="tag">Supportive</span>
+									<span class="tag">Math</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 17 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="#" alt="🥊">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Азамат</div>
+
+								<div class="card-bio">
+									Математика есептерін шашады және бокспен айналысуды жақсы көреді және
+									болашақта спортшы болуды армандайды.
+								</div>
+								<div class="card-tags">
+									<span class="tag">Boxing</span>
+									<span class="tag">Sports</span>
+									<span class="tag">Athlete</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 18 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/gauhar.jpeg" alt="🎨">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Гаухар</div>
+
+								<div class="card-bio">
+									Өте мейірімді және көмекші оқушы.
+								</div>
+								<div class="card-tags">
+									<span class="tag">Helpful</span>
+									<span class="tag">Kind</span>
+									<span class="tag">Supportive</span>
+								</div>
+							</div>
+						</div>
+						<!-- Student 19 -->
+						<div class="card">
+							<div class="card-image">
+								<img class="card-emoji" src="images/aidana.jpeg" alt="📚">
+							</div>
+							<div class="card-content">
+								<div class="card-name">Перизат</div>
+
+								<div class="card-bio">
+									Әдебиет пен тілдерді жақсы көретін оқушы.📚 Және Математика Сауаттылық
+									шашады.
+								</div>
+								<div class="card-tags">
+									<span class="tag">Helpful</span>
+									<span class="tag">Kind</span>
+									<span class="tag">Supportive</span>
+									<span class="tag">Math Sauattylyk</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</article>
+			<footer id="footer">
+				<p style="text-align: center;">Біздің әлеуметтік желілеріміз.</p>
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-tiktok"><span
+								class="label">TikTok</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span
+								class="label">Instagram</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Nurlan</li>
+					<li> Year: 2025-2026&clubs; </li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Фотогалерея — Zhetysai Ibilim 10C</title>
+		<meta charset="utf-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://kit.fontawesome.com/a076d05399.js"
+			crossorigin="anonymous"></script>
+		<style>
+			/* Gallery Styles */
+			.gallery-hero {
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+				padding: 70px 20px;
+				text-align: center;
+			}
+			.gallery-hero h1 {
+				font-size: 42px;
+				margin: 0 0 10px 0;
+			}
+			.gallery-hero p {
+				font-size: 18px;
+				opacity: 0.95;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			/* Filter Buttons */
+			.filter-container {
+				text-align: center;
+				padding: 30px 20px;
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+				gap: 12px;
+			}
+			.filter-btn {
+				padding: 0px 20px;
+				border: 2px solid #ddd;
+				background: white;
+				border-radius: 25px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				font-weight: 500;
+				color: #666;
+			}
+			.filter-btn:hover,
+			.filter-btn.active {
+				background: linear-gradient(90deg, #667eea, #764ba2);
+				color: white;
+				border-color: #667eea;
+			}
+
+			/* Gallery Grid */
+			.gallery-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+				gap: 20px;
+				padding: 40px 20px;
+				max-width: 1400px;
+				margin: 0 auto;
+			}
+
+			/* Gallery Item */
+			.gallery-item {
+				position: relative;
+				overflow: hidden;
+				border-radius: 15px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				cursor: pointer;
+				aspect-ratio: 1 / 1;
+				background: linear-gradient(135deg, #667eea, #764ba2);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				font-size: 80px;
+				transition: all 0.3s ease;
+			}
+
+			.gallery-item:hover {
+				transform: scale(1.05);
+				box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+			}
+
+			.gallery-item-image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.gallery-item-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.5);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				opacity: 0;
+				transition: all 0.3s ease;
+				color: white;
+				text-align: center;
+				padding: 20px;
+			}
+
+			.gallery-item:hover .gallery-item-overlay {
+				opacity: 1;
+			}
+
+			.overlay-title {
+				font-size: 22px;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+
+			.overlay-desc {
+				font-size: 14px;
+				opacity: 0.9;
+			}
+
+			/* Modal */
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0, 0, 0, 0.8);
+				animation: fadeIn 0.3s ease;
+			}
+
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+
+			.modal-content {
+				margin: 5% auto;
+				width: 90%;
+				max-width: 900px;
+				background: white;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+				animation: slideIn 0.3s ease;
+			}
+
+			@keyframes slideIn {
+				from {
+					transform: translateY(-50px);
+					opacity: 0;
+				}
+				to {
+					transform: translateY(0);
+					opacity: 1;
+				}
+			}
+
+			/* Upload form styles */
+			.upload-section {padding: 30px 20px; max-width: 980px; margin: 30px auto; text-align: center;}
+			.upload-form {display:flex; gap:12px; flex-wrap:wrap; justify-content:center; align-items:center;}
+			.upload-form input[type="file"] {padding:6px;}
+			.upload-form input[type="password"], .upload-form input[type="text"], .upload-form select {padding:8px 10px; border-radius:6px; border:1px solid #ddd;}
+			.upload-form button {padding:10px 16px; border-radius:8px; background: linear-gradient(90deg,#667eea,#764ba2); color:#fff; border:0; cursor:pointer}
+			.upload-msg {margin-top:10px; font-size:14px}
+			.upload-msg.error {color:#c0392b}
+			.upload-msg.success {color:#27ae60}
+
+			.modal-image {
+				width: 100%;
+				max-height: 500px;
+				object-fit: cover;
+				background: linear-gradient(135deg, #667eea, #764ba2);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 120px;
+				color: white;
+			}
+
+			.modal-body {
+				padding: 30px;
+			}
+
+			.modal-body h2 {
+				margin-top: 0;
+				color: #333;
+			}
+
+			.close {
+				position: absolute;
+				right: 20px;
+				top: 20px;
+				font-size: 32px;
+				font-weight: bold;
+				color: white;
+				cursor: pointer;
+				background: rgba(0, 0, 0, 0.5);
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: all 0.3s ease;
+				z-index: 10;
+			}
+
+			.close:hover {
+				background: rgba(0, 0, 0, 0.8);
+			}
+
+			/* Stats */
+			.gallery-stats {
+				background: #f5f5f5;
+				padding: 40px 20px;
+				text-align: center;
+			}
+
+			.stats-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+				gap: 30px;
+				max-width: 1000px;
+				margin: 0 auto;
+			}
+
+			.stat-item h3 {
+				font-size: 36px;
+				color: #667eea;
+				margin: 0;
+			}
+
+			.stat-item p {
+				color: #666;
+				margin: 10px 0 0 0;
+			}
+
+			@media (max-width: 768px) {
+				.gallery-container {
+					grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+					gap: 15px;
+					padding: 20px 15px;
+				}
+
+				.gallery-hero h1 {
+					font-size: 30px;
+				}
+
+				.modal-content {
+					width: 95%;
+					margin: 20% auto;
+				}
+			}
+
+			/* Toast + button loading */
+			.toast-wrap { position: fixed; right: 18px; bottom: 18px; display:flex; flex-direction:column; gap:10px; z-index:2000 }
+			.toast { background: rgba(255,255,255,0.96); color:#222; padding:10px 14px; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.12); backdrop-filter: blur(6px); font-weight:600; transition: transform .18s ease, opacity .18s ease }
+			.toast.success { border-left:4px solid #27ae60 }
+			.toast.error { border-left:4px solid #e74c3c }
+			.btn-loading { position: relative; pointer-events: none }
+			.btn-loading::after { content: ''; position: absolute; right: 12px; top:50%; transform:translateY(-50%); width:16px; height:16px; border-radius:50%; border:2px solid rgba(255,255,255,0.35); border-top-color: #fff; animation:spin 900ms linear infinite }
+			@keyframes spin { to { transform: translateY(-50%) rotate(360deg) } }
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="index.html">Zhetysai Ibilim 10C</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.html">Home - Меню</a></li>
+									<li><a href="student and teachers.html">Students and Teachers</a></li>
+
+									<li><a href="gallery.html">Gallery</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Hero Section -->
+			<section class="gallery-hero">
+				<h1>📸 Суреттер топтамасы 10C</h1>
+				<p>
+					Бұл біздің сыныптың ең жақсы сәттерін көрсететін фотогалерея. Мұнда біз
+					бірге өткізген іс-шаралар, жобалар және көңілді сәттеріміздің суреттері
+					бар. Әрбір фото біздің бірлігіміз бен достығымызды көрсетеді. Төмендегі
+					сүзгілерді пайдаланып, әртүрлі категориялар бойынша суреттерді қараңыз!
+				</p>
+			</section>
+
+			<!-- Filter Section -->
+			<div class="filter-container">
+				<button class="filter-btn " onclick="filterGallery('events', this)">🎉
+					Іс-шаралар</button>
+				<button class="filter-btn " onclick="filterGallery('study', this)">📚
+					Оқу</button>
+				<button class="filter-btn" onclick="filterGallery('projects', this)">🚀
+					Жобалар</button>
+				<button class="filter-btn" onclick="filterGallery('fun', this)">😄
+					Көңілді</button>
+			</div>
+
+			<!-- Main Content -->
+			<article id="main">
+
+				<div class="gallery-container" id="gallery">
+					<!-- Event 1 -->
+					<div class="gallery-item" data-category="events" onclick="openModal(this)">
+						<div>🎉</div>
+						<div class="gallery-item-overlay">
+
+						</div>
+					</div>
+
+					<!-- Event 2 -->
+
+					<!-- Study 1 -->
+					<div class="gallery-item" data-category="study" onclick="openModal(this)">
+						<div>📚</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">Олимпиада</div>
+							<div class="overlay-desc">Участие в научном конкурсе</div>
+						</div>
+					</div>
+
+					<!-- Study 2 -->
+					<div class="gallery-item" data-category="study" onclick="openModal(this)">
+						<div>✏️</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">Занятия</div>
+							<div class="overlay-desc">Интерактивные уроки в классе</div>
+						</div>
+					</div>
+
+					<!-- Project 1 -->
+					<div class="gallery-item" data-category="projects"
+						onclick="openModal(this)">
+						<div>💻</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">Веб-проект</div>
+							<div class="overlay-desc">Создание школьного портала</div>
+						</div>
+					</div>
+
+					<!-- Project 2 -->
+					<div class="gallery-item" data-category="projects"
+						onclick="openModal(this)">
+						<div>🤖</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">IT-проект</div>
+							<div class="overlay-desc">Работа над робототехникой</div>
+						</div>
+					</div>
+
+					<!-- Fun 1 -->
+					<div class="gallery-item" data-category="fun" onclick="openModal(this)">
+						<div>😄</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">Селфи класса</div>
+							<div class="overlay-desc">Веселый момент с друзьями</div>
+						</div>
+					</div>
+
+					<!-- Fun 2 -->
+
+					<!-- Event 3 -->
+
+					<!-- Study 3 -->
+					<div class="gallery-item" data-category="study" onclick="openModal(this)">
+						<div>🧪</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">Лаборатория</div>
+							<div class="overlay-desc">Научные эксперименты и опыты</div>
+						</div>
+					</div>
+
+					<!-- Project 3 -->
+					<div class="gallery-item" data-category="projects"
+						onclick="openModal(this)">
+						<div>🎨</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">Дизайн-проект</div>
+							<div class="overlay-desc">Творческая работа и графика</div>
+						</div>
+					</div>
+
+					<!-- Fun 3 -->
+					<div class="gallery-item" data-category="fun" onclick="openModal(this)">
+						<div>🎸</div>
+						<div class="gallery-item-overlay">
+							<div class="overlay-title">Концерт</div>
+							<div class="overlay-desc">Талант-шоу в школе</div>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<!-- Stats Section -->
+
+			<!-- Add Image (requires password) -->
+			<section class="upload-section">
+				<h2>
+					📤 Өзімнің телефоным арқылы сурет
+				</h2>
+				<form id="uploadForm" class="upload-form"
+					onsubmit="handleAddImageSubmit(event)">
+					<input type="file" id="uploadFile" accept="image/*" required />
+					<input type="text" id="uploadTitle" placeholder="Заголовок" required />
+					<select id="uploadCategory">
+						<option value="events">🎉 Іс-шаралар</option>
+						<option value="study">📚 Оқу</option>
+						<option value="projects">🚀 Жобалар</option>
+						<option value="fun">😄 Көңілді</option>
+					</select>
+					<input type="password" id="uploadPassword" placeholder="Пароль" required />
+					<label style="display:flex; align-items:center; gap:8px;">
+						<input type="checkbox" id="uploadToServer" />
+						<span style="font-size:13px;">
+
+						</span>
+					</label>
+					<button type="submit"
+						style="padding: 0px 20px;text-align: center;">Қосу</button>
+				</form>
+				<div id="uploadMsg" class="upload-msg" aria-live="polite"></div>
+			</section>
+
+			<!-- Modal -->
+			<div id="imageModal" class="modal">
+				<div class="modal-content">
+					<span class="close" onclick="closeModal()">&times;</span>
+					<div class="modal-image" id="modalImage">
+						<div style="font-size: 120px;">📸</div>
+					</div>
+					<div class="modal-body">
+						<h2 id="modalTitle">Фото</h2>
+						<p id="modalDesc">Сурет сипаттамасы</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><span style="text-align:center; display:block; color:#666">Соцсети
+							скрыты</span></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Zhetysai Ibilim 10C</li><li> Year: 2025-2026</li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<!-- Telegram config (separate block) -->
+		<script id="tg-config">
+			// ⚙️  Конфигурация Telegram
+			// 
+			// TG_PROXY_URL: URL вашего Cloudflare Worker, который безопасно хранит BOT_TOKEN
+			//   Пример: https://telegram-proxy.example.workers.dev/send-photo
+			//   (Не храните BOT_TOKEN в клиентском коде!)
+			//
+			// TG_CHAT_ID: ваш администраторский ID для получения фото
+			//   Получить: отправьте сообщение @userinfobot в Telegram и скопируйте User ID
+			//
+			// 📖 Подробная инструкция: см. ../TELEGRAM_SETUP.md
+			//
+			const TG_PROXY_URL = 'PUT_YOUR_WORKER_URL_HERE'; // e.g. https://telegram-proxy.example.workers.dev/send-photo
+			const TG_CHAT_ID = 'PUT_YOUR_CHAT_ID_HERE';      // e.g. 123456789
+		</script>
+
+		<!-- Gallery Script -->
+		<script>
+			function escapeHtml(str) {
+				return String(str || '').replace(/[&<>'"]/g, function(m) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
+			}
+
+			function showToast(message, type='success', timeout=3800) {
+				let wrap = document.querySelector('.toast-wrap');
+				if (!wrap) { wrap = document.createElement('div'); wrap.className='toast-wrap'; document.body.appendChild(wrap); }
+				const t = document.createElement('div'); t.className = 'toast '+(type==='error'? 'error':'success'); t.textContent = message; wrap.appendChild(t);
+				setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateY(6px)'; setTimeout(()=>t.remove(),250) }, timeout);
+			}
+
+			function dataURLtoBlob(dataurl) {
+				const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1];
+				const bstr = atob(arr[1]);
+				let n = bstr.length; const u8arr = new Uint8Array(n);
+				while(n--) u8arr[n] = bstr.charCodeAt(n);
+				return new Blob([u8arr], {type:mime});
+			}
+
+			function filterGallery(category, btn) {
+				const items = document.querySelectorAll('.gallery-item');
+				const btns = document.querySelectorAll('.filter-btn');
+
+				// Update button styles
+				btns.forEach(b => b.classList.remove('active'));
+				if (btn && btn.classList) {
+					btn.classList.add('active');
+				}
+
+				// Filter items
+				items.forEach(item => {
+					if (category === 'all' || item.dataset.category === category) {
+						item.style.display = 'block';
+					} else {
+						item.style.display = 'none';
+					}
+				});
+			}
+
+			// Attach handler only if form exists on page
+			(function attachUploadHandler(){
+				const form = document.getElementById('uploadForm');
+				if (!form) return;
+
+				const fileInput = document.getElementById('uploadFile');
+				const titleInput = document.getElementById('uploadTitle');
+				const catSelect = document.getElementById('uploadCategory');
+				const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('input[type="submit"]');
+
+					form.addEventListener('submit', async function(e){
+						e.preventDefault();
+						if (!window.TG_PROXY_URL || !window.TG_CHAT_ID) {
+							showToast('Ошибка: не задан TG_PROXY_URL или TG_CHAT_ID (см. tg-config).', 'error', 6000);
+							return;
+						}
+
+					if (!fileInput || !fileInput.files || fileInput.files.length===0) { showToast('Пожалуйста, выберите изображение.', 'error'); return; }
+					const file = fileInput.files[0];
+					const title = titleInput ? titleInput.value.trim() : '';
+					const category = catSelect ? catSelect.value : '';
+
+					// UI: disable button and show loading
+					if (submitBtn) { submitBtn.classList.add('btn-loading'); submitBtn.disabled = true; }
+
+					try {
+						// read as dataURL then convert to blob (keeps original image data)
+						const dataUrl = await new Promise((res, rej) => {
+							const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file);
+						});
+
+						const blob = dataURLtoBlob(dataUrl);
+						const fd = new FormData();
+						fd.append('chat_id', window.TG_CHAT_ID);
+						const caption = `${escapeHtml(title || 'Фото')} — ${escapeHtml(category)}\nДобавлено с сайта 10C`;
+						fd.append('caption', caption);
+						fd.append('photo', blob, file.name || 'photo.jpg');
+
+						// Prefer proxy endpoint (stores BOT token securely on server/worker)
+						const proxyUrl = window.TG_PROXY_URL;
+						const proxyFd = new FormData();
+						proxyFd.append('chat_id', window.TG_CHAT_ID);
+						proxyFd.append('caption', caption);
+						proxyFd.append('photo', blob, file.name || 'photo.jpg');
+
+						const resp = await fetch(proxyUrl, { method: 'POST', body: proxyFd });
+						if (!resp.ok) throw resp;
+						const json = await resp.json();
+						if (json && json.ok) {
+							showToast('Отправлено администратору', 'success', 4000);
+							// clear form
+							form.reset();
+						} else {
+							console.warn('Telegram response:', json);
+							showToast('Ошибка отправки (Telegram API).', 'error', 6000);
+						}
+					} catch (err) {
+						console.error('Send error', err);
+						// Likely CORS or network error
+						showToast('Ошибка отправки. Возможно, браузер блокирует прямые запросы к Telegram (CORS).', 'error', 8000);
+					} finally {
+						if (submitBtn) { submitBtn.classList.remove('btn-loading'); submitBtn.disabled = false; }
+					}
+				});
+			})();
+
+			function openModal(element) {
+				const modal = document.getElementById('imageModal');
+				const overlay = element.querySelector('.gallery-item-overlay');
+				const title = overlay ? overlay.querySelector('.overlay-title') : null;
+				const desc = overlay ? overlay.querySelector('.overlay-desc') : null;
+				document.getElementById('modalTitle').textContent = title ? title.textContent : 'Фото';
+				document.getElementById('modalDesc').textContent = desc ? desc.textContent : 'Сурет сипаттамасы';
+				modal.style.display = 'block';
+			}
+
+			function closeModal() {
+				document.getElementById('imageModal').style.display = 'none';
+			}
+
+			window.onclick = function(event) {
+				const modal = document.getElementById('imageModal');
+				if (event.target === modal) {
+					modal.style.display = 'none';
+				}
+			}
+
+
+		</script>
+
+	</body>
+</html>

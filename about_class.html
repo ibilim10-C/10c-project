@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>О нас — Zhetysai Ibilim 10C</title>
+		<meta charset="utf-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Page-specific styles for About Class */
+			.hero {
+				background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+				color: white;
+				padding: 80px 20px;
+				text-align: center;
+			}
+			.hero h1 {font-size: 42px; margin: 0 0 10px;}
+			.hero p {font-size: 18px; opacity: 0.95; max-width: 900px; margin: 0 auto}
+
+			.container {max-width: 1200px; margin: 40px auto; padding: 0 20px}
+			.cards {display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 24px}
+			.card {background: white; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);}
+			.card h3 {margin-top: 0}
+			.stat {display:flex; gap:12px; align-items:center}
+			.stat .num{font-weight:700; font-size:28px; color:#333}
+			.timeline {border-left:3px solid rgba(0,0,0,0.06); padding-left:20px}
+			.timeline-item {position:relative; margin: 18px 0}
+			.timeline-item::before{content:''; width:12px; height:12px; border-radius:50%; background:linear-gradient(90deg,#667eea,#764ba2); position:absolute; left:-30px; top:6px}
+			.values {color: #000; display:flex; gap:20px; flex-wrap:wrap}
+			.value {color: #000; flex:1 1 220px; background:linear-gradient(135deg,#f9f9f9,#fff); padding:16px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+
+			.cta {text-align:center; margin:50px 0}
+			.button-primary {background:linear-gradient(90deg,#667eea,#764ba2); color:white; padding:12px 22px; border-radius:8px; text-decoration:none}
+
+			@media (max-width:700px){ .hero h1{font-size:30px} }
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<h1><a href="index.html">Zhetysai Ibilim 10C</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.html">Home - Меню</a></li>
+									<li><a href="student and teachers.html">Students and Teachers</a></li>
+									<li><a href="about_class.html">About Class</a></li>
+									<li><a href="gallery.html">Gallery</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Hero -->
+			<section class="hero">
+				<div class="inner">
+					<h1>Біздің сынып — Zhetysai Ibilim 10C</h1>
+					<p>
+						«10 «С» — Жетісай қаласының білімге ынталы, мақсатшыл және тату оқушылары
+						жиналған сынып. Біз бірге оқып, бірге өсіп, әртүрлі жобалар мен
+						іс-шараларға қатысып, өзіміздің біліміміз бен дағдыларымызды жетілдіреміз.
+						Біздің сыныпта әркімнің дауысы естіледі, ал әрбір жетістік — ортақ қуаныш.
+						Біз болашаққа сеніммен қараймыз және бірге үлкен жетістіктерге жетеміз.»
+					</p>
+				</div>
+			</section>
+
+			<!-- Content -->
+			<article id="main">
+				<div class="container">
+					<!-- Mission & Vision -->
+					<section class="card">
+						<h2>Миссия и видение</h2>
+						<p>Наша миссия — создать безопасную и вдохновляющую среду, где каждый
+							ученик раскрывает свой потенциал, учится думать критически и работает над
+							реальными проектами. Мы ценим уважение, любознательность и
+							ответственность.</p>
+						<div style="display:flex; gap:20px; margin-top:18px; flex-wrap:wrap">
+							<div class="stat"><div class="num">30+</div><div>Учеников</div></div>
+							<div class="stat"><div class="num">5</div><div>Опытных
+									учителей</div></div>
+							<div class="stat"><div class="num">10+</div><div>Проектов в
+									году</div></div>
+						</div>
+					</section>
+
+					<!-- Values -->
+					<section style="margin-top:26px">
+						<h2>Наші ценности</h2>
+						<div class="values">
+							<div class="value"><h3>Уважение</h3><p>Мы создаём добрую атмосферу, где
+									голос каждого важен.</p></div>
+							<div class="value"><h3>Любознательность</h3><p>Поощряем задавать вопросы
+									и искать ответы самостоятельно.</p></div>
+							<div class="value"><h3>Творчество</h3><p>Поддерживаем проекты и
+									инициативы, которые развивают креативность.</p></div>
+							<div class="value"><h3>Ответственность</h3><p>Задачи выполняются вовремя,
+									а ошибки используются как уроки.</p></div>
+						</div>
+					</section>
+
+					<!-- Timeline -->
+					<section style="margin-top:26px">
+						<h2>Краткая история 10C</h2>
+						<div class="timeline">
+							<div class="timeline-item"><strong>Сентябрь 2022</strong> — Сборный класс
+								10C, знакомство, первые проекты.</div>
+							<div class="timeline-item"><strong>Декабрь 2023</strong> — Победа в
+								школьной олимпиаде по математике.</div>
+							<div class="timeline-item"><strong>Май 2024</strong> — Выпуск
+								мини-проекта: школьный веб-портал.</div>
+							<div class="timeline-item"><strong>Ноябрь 2025</strong> — Развитие
+								IT-кружка и участие в хакатоне.</div>
+						</div>
+					</section>
+
+					<!-- Team highlights -->
+					<section style="margin-top:26px">
+						<h2>Учителя и лидеры</h2>
+						<div class="cards" style="margin-top:12px">
+							<div class="card">
+								<h3>
+
+								</h3>
+								<p></p>
+							</div>
+							<div class="card">
+								<h3>Сауле — Учитель Английского</h3>
+								<p>Помогает раскрыть язык через практические занятия и проекты.</p>
+							</div>
+							<div class="card">
+								<h3>Админ Сәлі — IT-наставник</h3>
+								<p>Отвечает за цифровую среду и школьные веб-проекты.</p>
+							</div>
+						</div>
+					</section>
+
+					<!-- CTA -->
+					<section class="cta">
+						<a class="button-primary" href="gallery.html">Посмотреть галерею
+							класса</a>
+					</section>
+				</div>
+			</article>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<p style="text-align: center;">Біздің әлеуметтік желілеріміз.</p>
+					<li><a
+							href="https://www.tiktok.com/@ibilim_graduet_2k27?_r=1&_t=ZM-928hmwFIV4a"
+							class="icon brands fa-tiktok"><span class="label">Twitter</span></a></li>
+					<li><a href="https://www.instagram.com/ibilim.hs_10c?igsh=d3U4b2NjbWYxYTVl"
+							class="icon brands fa-instagram"><span
+								class="label">Instagram</span></a></li>
+
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Nurlan</li><li> Year: 2025-2026&clubs; </li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
