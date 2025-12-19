@@ -4183,3 +4183,11 @@ img {
 img:hover {
   transform: scale(1.02);
 }
+@media (max-width: 768px) {
+  .students,
+  .teachers {
+    width: 100%;
+    float: none;
+    display: block;
+  }
+}
