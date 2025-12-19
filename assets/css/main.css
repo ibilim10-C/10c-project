@@ -4183,11 +4183,18 @@ img {
 img:hover {
   transform: scale(1.02);
 }
+
+/* Fix Students section on mobile */
 @media (max-width: 768px) {
-  .students,
-  .teachers {
-    width: 100%;
-    float: none;
-    display: block;
+
+  .students, 
+  .students * {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .students .card {
+    width: 100% !important;
   }
 }
